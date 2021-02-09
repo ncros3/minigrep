@@ -1,10 +1,14 @@
 use std::env;
 use std::fs;
+use std::process;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    let grepConfig= Config::new(&args);
+    let grepConfig= Config::new(&args).unwrap_or_else(|err| {
+        println!("problem parsing arguments: {}", err);
+        process::exit(1);
+    });
 }
 
 struct Config {
