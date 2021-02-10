@@ -9,6 +9,18 @@ fn main() {
         println!("problem parsing arguments: {}", err);
         process::exit(1);
     });
+
+    println!("Searching for {}", grepConfig.query);
+    println!("In file {}", grepConfig.filename);
+
+    run(grepConfig);
+}
+
+fn run( config: Config) {
+    let contents = fs::read_to_string(config.filename)
+        .expect("Something went wrong went reading the file");
+
+    println!("With text : {}", contents);
 }
 
 struct Config {
